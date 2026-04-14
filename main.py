@@ -55,6 +55,7 @@ def main():
     parser = argparse.ArgumentParser()
     def_indir=os.path.join(homedir,"data","rcpa","in")
     def_outdir=os.path.join(homedir,"data","rcpa","out")
+    def_logdir=os.path.join(homedir,"data","rcpa","logs")
     def_sheet_name = "RCPA SPIA Requesting_Mar 2026"
     def_col_name = "Specimen"
    
@@ -67,7 +68,7 @@ def main():
     args = parser.parse_args()
     now = datetime.now() # current date and time
     ts = now.strftime("%Y%m%d-%H%M%S")
-    logsdir=os.path.join(homedir,"data","ucum","logs")
+    logsdir=def_logdir
     FORMAT='%(asctime)s %(lineno)d : %(message)s'
     os.makedirs(logsdir, exist_ok=True)
     logging.basicConfig(format=FORMAT, filename=os.path.join(logsdir,f'xls2cs-{ts}.log'),level=logging.INFO)

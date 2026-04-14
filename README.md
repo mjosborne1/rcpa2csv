@@ -2,14 +2,14 @@
 
 Convert RCPA Excel files into tab-delimited text files for SNAP2SNOMED import.
 
-The script scans an input directory for Excel files, extracts values from one column, normalizes/splits values, and writes one output file per source workbook.
+The script scans an input directory for Excel files, extracts values from one column, normalizes/splits values, and writes one output file per source workbook. The script has been refined to values for `Specimen` but may be used for other columns.
 
 ## What It Produces
 
 For each input Excel file, the script writes a `.txt` file with 2 columns:
 
 - `code`: sequential integer (`1..n`)
-- `display`: extracted specimen text value
+- `display`: extracted column text value e.g. specimen
 
 Rules applied while building output:
 
@@ -18,7 +18,8 @@ Rules applied while building output:
 - Empty values are removed
 - Duplicates are removed
 - Final rows are sorted by `display`
-- `Serum;Plasma` (or `Plasma;Serum`) is treated as a single value
+- If `Specimen` column is targeted:
+  - `Serum;Plasma` (or `Plasma;Serum`) is treated as a single value
 
 ## Requirements
 
@@ -67,4 +68,4 @@ Default values in the current script:
 
 - Temporary Excel lock files (starting with `~$`) are ignored.
 - Only these file extensions are processed: `.xls`, `.xlsx`, `.xlsm`, `.xlsb`.
-- Logs are written under `$HOME/data/ucum/logs`.
+- Logs are written under `$HOME/data/rcpa/logs`.
